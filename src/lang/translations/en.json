@@ -1,0 +1,8 @@
+{
+    "hello":"Hello",
+    "homePage":"Home Page",
+    "aboutPage":"About Page",
+    "welcome": "Hello {name}",
+    "filter": "Filter",
+    "list_of_coaches": "List of coaches"
+}
