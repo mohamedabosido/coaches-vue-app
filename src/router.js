@@ -13,20 +13,19 @@ const router = createRouter({
     { path: '/', redirect: '/coaches' },
     {
       name: 'coaches',
-      path: '/coaches/',
+      path: '/coaches',
       component: CoachesList,
+    },
+    {
+      path: '/coaches/:id',
+      props: true,
+      component: CoachDetail,
       children: [
         {
-          path: ':id',
-          component: CoachDetail,
-          children: [
-            {
-              path: 'contact',
-              component: ContactCoach,
-              props: true,
-            }, // /coaches/c1/contact
-          ],
-        },
+          path: 'contact',
+          component: ContactCoach,
+          props: true,
+        }, // /coaches/c1/contact
       ],
     },
     { path: '/register', component: CoachRegistration },
@@ -39,5 +38,4 @@ router.beforeEach((to, from, next) => {
   i18n.locale = localStorage.getItem('language') || 'en';
   return next();
 });
-
 export default router;

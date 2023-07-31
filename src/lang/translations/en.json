@@ -4,5 +4,13 @@
     "aboutPage":"About Page",
     "welcome": "Hello {name}",
     "filter": "Filter",
-    "list_of_coaches": "List of coaches"
+    "list_of_coaches": "List of coaches",
+    "find_a_coach": "Find a coach",
+    "all_coaches": "All coaches",
+    "requests" : "Requests",
+    "refresh" : "Refresh",
+    "register_as_coach" : "Register as coach",
+    "no_coaches" : "No coaches",
+    "contact" : "Contact",
+    "view_details" : "View details"
 }

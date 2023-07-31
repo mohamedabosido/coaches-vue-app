@@ -4,5 +4,14 @@
     "aboutPage": "حول الصفحة",
     "welcome": "مرحبا {name}",
     "filter": "تصفية",
-    "list_of_coaches": "قائمة المدربين"
+    "list_of_coaches": "قائمة المدربين",
+    "find_a_coach": "البحث عن مدرب",
+    "all_coaches": "جميع المدربين",
+    "requests" : "الطلبات",
+    "refresh" : "تحديث",
+    "register_as_coach" : "التسجيل كمدرب",
+    "no_coaches" : "لا يوجد مدربين",
+    "contact" : "اتصل",
+    "view_details" : "عرض التفاصيل"
+    
 }
