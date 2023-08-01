@@ -1,6 +1,8 @@
 <template>
-    <div>
-        <h1>Page not found!</h1>
-        <p>What are you doing here? You shouldn't be here.</p>
-    </div>
+    <section>
+        <base-card>
+            <h2>Page not found!</h2>
+            <p>this page could not be found - maybe checkout all our <router-link to="/coaches">coaches </router-link>.</p>
+        </base-card>
+    </section>
 </template>
