@@ -1,36 +1,40 @@
 <template>
-  <div>
-    <teleport to="body">
-      <base-dialog :show="!!error" title="An error occurred!" @close="handleError">
-        <p>{{ error }}</p>
-      </base-dialog>
-    </teleport>
-    <section>
-      <coach-filter @change-filter="setFilters"></coach-filter>
-    </section>
-    <section>
-      <base-card>
-        <div class="controls">
-          <base-button mode="outline" link @click="loadCoaches(true)">{{
-            $t('refresh')
-          }}</base-button>
-          <base-button link to="/register" v-if="!isCoach && !this.isLoading">{{
-            $t('register_as_coach')
-          }}</base-button>
-        </div>
-        <div v-if="isLoading">
-          <base-spinner></base-spinner>
-        </div>
-        <ul v-if="hasCoaches">
-          <li v-for="coach in filteredCoaches" :key="coach.id">
-            <coach-item :id="coach.id" :first-name="coach.firstName" :last-name="coach.lastName" :areas="coach.areas"
-              :rate="coach.hourlyRate"></coach-item>
-          </li>
-        </ul>
-        <h3 v-else>{{ $t('no_coaches') }}</h3>
-      </base-card>
-    </section>
-  </div>
+  <teleport to="body">
+    <base-dialog :show="error" title="An error occurred!" @close="handleError">
+      <p>{{ error }}</p>
+    </base-dialog>
+  </teleport>
+  <section>
+    <coach-filter @change-filter="setFilters"></coach-filter>
+  </section>
+  <section>
+    <base-card>
+      <div class="controls">
+        <base-button mode="outline" link @click="loadCoaches(true)">{{
+          $t('refresh')
+        }}</base-button>
+        <base-button link to="/auth" v-if="!isLoggedIn">Login</base-button>
+        <base-button link to="/register" v-if="isLoggedIn && !isCoach && !this.isLoading">{{
+          $t('register_as_coach')
+        }}</base-button>
+      </div>
+      <div v-if="isLoading">
+        <base-spinner></base-spinner>
+      </div>
+      <ul v-if="hasCoaches">
+        <li v-for="coach in filteredCoaches" :key="coach.id">
+          <coach-item
+            :id="coach.id"
+            :first-name="coach.firstName"
+            :last-name="coach.lastName"
+            :areas="coach.areas"
+            :rate="coach.hourlyRate"
+          ></coach-item>
+        </li>
+      </ul>
+      <h3 v-else>{{ $t('no_coaches') }}</h3>
+    </base-card>
+  </section>
 </template>
 
 <script>
@@ -49,6 +53,9 @@ export default {
     };
   },
   computed: {
+    isLoggedIn() {
+      return this.$store.getters.isAuthenticated;
+    },
     filteredCoaches() {
       const coaches = this.$store.getters['coaches/coaches'];
       return coaches.filter((coach) => {

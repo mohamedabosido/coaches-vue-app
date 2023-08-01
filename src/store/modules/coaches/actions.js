@@ -10,7 +10,8 @@ export default {
             description: data.description,
             hourlyRate: data.hourlyRate,
         };
-        const response = await fetch(`https://vue-http-demo-6d2b8-default-rtdb.europe-west1.firebasedatabase.app/coaches/${userId}.json`, {
+        const token = context.rootGetters.token;
+        const response = await fetch(`https://vue-http-demo-6d2b8-default-rtdb.europe-west1.firebasedatabase.app/coaches/${userId}.json?auth=${token}`, {
             method: 'PUT',
             body: JSON.stringify(coachData)
         });
@@ -26,10 +27,12 @@ export default {
         });
     },
     async loadCoaches(context, payload) {
+        const token = context.rootGetters.token;
+
         if (!payload.forceRefresh && !context.getters.shouldUpdate) {
             return;
         }
-        const response = await fetch(`https://vue-http-demo-6d2b8-default-rtdb.europe-west1.firebasedatabase.app/coaches.json`);
+        const response = await fetch(`https://vue-http-demo-6d2b8-default-rtdb.europe-west1.firebasedatabase.app/coaches.json?auth=${token}`);
 
         const responseData = await response.json();
 

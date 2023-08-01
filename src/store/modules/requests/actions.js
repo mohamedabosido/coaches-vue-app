@@ -26,8 +26,9 @@ export default {
   },
   async fetchRequests(context) {
     const userId = context.rootGetters.userId;
+    const token = context.rootGetters.token;
     const response = await fetch(
-      `https://vue-http-demo-6d2b8-default-rtdb.europe-west1.firebasedatabase.app/requests/${userId}.json`
+      `https://vue-http-demo-6d2b8-default-rtdb.europe-west1.firebasedatabase.app/requests/${userId}.json?auth=${token}`
     );
     const responseData = await response.json();
     if (!response.ok) {

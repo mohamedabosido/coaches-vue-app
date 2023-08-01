@@ -1,15 +1,39 @@
 <template>
   <header>
     <nav>
-      <h1><router-link to="/">{{ $t('find_a_coach') }}</router-link></h1>
+      <h1>
+        <router-link to="/">{{ $t('find_a_coach') }}</router-link>
+      </h1>
       <ul>
-        <li><router-link to="/coaches">{{ $t('all_coaches') }}</router-link></li>
-        <li><router-link to="/requests">{{ $t('requests') }}</router-link></li>
+        <li>
+          <router-link to="/coaches">{{ $t('all_coaches') }}</router-link>
+        </li>
+        <li v-if="!isLoggedIn">
+          <router-link to="/auth">Login</router-link>
+        </li>
+        <li v-else>
+          <router-link to="/requests">{{ $t('requests') }}</router-link>
+        </li>
+        <li>
+          <router-link @click="logout" v-if="isLoggedIn">Logout</router-link>
+        </li>
       </ul>
     </nav>
   </header>
 </template>
-
+<script>
+export default {
+  isLoggedIn() {
+    return this.$store.getters.isAuthenticated;
+  },
+  methods: {
+    logout() {
+      this.$store.dispatch('logout');
+      this.$router.replace('/');
+    },
+  },
+};
+</script>
 
 <style scoped>
 header {
